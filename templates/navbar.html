@@ -1,0 +1,80 @@
+{% load static %}
+<div class="container-fluid px-0 mx-0  ">
+    <div class="container col-lg-10 py-3">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class=" text-decoration-none logo" href="/"><img class="mb-3 me-2" height="60" src="{% static 'images/logo.png'%}" >
+            <!-- <img class="mb-4 " height="20" src="{% static 'images/logof.png'%}" > -->
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item me-3">
+                <a class="nav-link {{homepage}}" aria-current="page" href="/"
+                  >QR</a
+                >
+              </li>
+              <li class="nav-item me-3">
+                <a class="nav-link {{article_page}} " href="/articles">Articles</a>
+              </li>
+              <li class="nav-item me-3">
+                <a class="nav-link {{tools_page}}" href="#">History</a>
+              </li>
+             
+              <li class="nav-item me-3">
+                <a class="nav-link {{about_page}}" href="/ourstory" >Medications</a>
+              </li>
+           
+             <li class="nav-item me-3">
+              <a class="nav-link" href="#"><i class="fa fa-search" ></i></a>
+            </li>
+
+            
+            </ul>
+            <!-- <div class="dropdown me-3">
+              <a
+                class="btn btn-white dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa fa-money me-2"></i> Language
+              </a>
+        
+            </div> -->
+            <!-- <div class="dropdown">
+              <a
+                class="btn btn-dark dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                More
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div> -->
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>

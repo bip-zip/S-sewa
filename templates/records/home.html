@@ -1,0 +1,29 @@
+{% extends '../base.html' %}
+{% load static %}
+{%block bodyblock%}
+
+<!-- Landing Page Section -->
+<div class="container-fluid px-0 mx-0 homediv">
+ <div class="container col-lg-9 py-5 my-5">
+   <div class="row">
+    <div class="col-lg-6 me-3">
+        <img src="{%static 'images/home.png'%}" class="img-fluid" alt="homepicture">
+    </div>
+    <div class="col">
+        <h3>Welcome to S-Sewa!</h3><br>
+
+           <p class="fs-5 fw-light text-justify">Track your health activities and medical expenses seamlessly with S-Sewa. The web application designed to provide you with a personalized health record management system. </p>
+            
+            <p class="fs-5 fw-light" >Join us today and take control of your health journey with S-Sewa.</p>
+
+            <a href="{% url 'user_auth:register'%}" class="btn mt-3  btn-primary">Get Started Now</a>
+
+    </div>
+
+   </div>
+ </div>
+</div> 
+<!-- Mentioned By thousands. including -->
+
+
+{%endblock%}

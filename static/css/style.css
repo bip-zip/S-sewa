@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    scroll-behavior: smooth;
+}
+.homediv{
+    /* background-image: url('../images/bg.svg'); */
+}
+.btn{
+    border-radius: 0px !important;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus{
+    outline:none;
+    box-shadow:none;
+}
+.form-control:focus, .form-control:active:focus, .form-control.active:focus{
+    outline: none;
+    box-shadow: none;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+.nav-link{
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1.7px;
+    color: #000;
+    transition: 0.78s;
+}
+.logo{
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1.7px;
+    color: #000;
+    transition: 0.78s;
+}
+
+.bg-primary{
+    background-color: #0c9fce !important;
+}
+
+
+.nav-link:hover{
+    color: #0c9fce;
+}
+
+.btn-yellow{
+    /* background-color:#FFDF00; */
+    background-color:#FFD800;
+    color: #2e2e2e; 
+}
+.btn-orange{
+    /* background-color:#FFDF00; */
+    background-color:#ff4a00;
+    /* color: #2e2e2e;  */
+}
+.btn-purple{
+    /* background-color:#FFDF00; */
+    background-color:#a200ff;
+    /* color: #2e2e2e;  */
+}
+
+.btn-success{
+    /* background-color:#FFDF00; */
+    background-color:#00d824 !important;
+    color: #ffffff !important; 
+    border: none;
+}
+.btn-primary{
+    /* background-color:#FFDF00; */
+    background-color:#00bfd8 !important;
+    color: #ffffff !important; 
+    border: none;
+}
+/* #4A4A4A
+#3498DB
+#16A085
+#F1C40F
+#9B59B6
+#34495E
+#2E86C1
+#28B463
+#F7DC6F
+#8E44AD */
+
+
+
+/* Footer Link */.footer_link{
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: 0.78s;
+    color: #2e2e2e;
+
+
+}
+
+.footer_link:hover{
+    color: #FFD800;
+    /* background-color: #FFD800;
+    padding: 4px; */
+}
+
+
+
+
