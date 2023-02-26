@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'records',
-    'user_auth'
+    'user_auth',
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -103,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+LOGIN_REDIRECT_URL = 'records:home'
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 

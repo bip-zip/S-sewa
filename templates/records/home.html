@@ -5,6 +5,10 @@
 <!-- Landing Page Section -->
 <div class="container-fluid px-0 mx-0 homediv">
  <div class="container col-lg-9 py-5 my-5">
+  {% if user.is_authenticated %}
+  <h3>{{user.username}}</h3>
+ 
+   {% else %}
    <div class="row">
     <div class="col-lg-6 me-3">
         <img src="{%static 'images/home.png'%}" class="img-fluid" alt="homepicture">
@@ -21,6 +25,7 @@
     </div>
 
    </div>
+   {%endif%}
  </div>
 </div> 
 <!-- Mentioned By thousands. including -->

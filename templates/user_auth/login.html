@@ -1,5 +1,6 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 {%block bodyblock%}
 
 <!-- Landing Page Section -->
@@ -11,15 +12,12 @@
     </div>
     <div class="col my-3">
         <h3 >Login</h3><br>
-        <form action="">
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-              </div>
+        <form method="post">
+          
+            {% csrf_token %}
+            <!-- {{ form.as_floating }} -->
+            {% bootstrap_form form layout='floating'  %}
+          
              
               <div class="mt-5 mb-3">
                 <button type="submit" class="btn btn-primary">Sign In</button>
