@@ -10,4 +10,4 @@ class RegisterView(TemplateView):
 
 class SigninView(LoginView):
     template_name='user_auth/login.html'
-    success_url = '/'
+
