@@ -1,12 +1,10 @@
 {% for message in messages %}
                     {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                    <div class="container-fluid px-0 mx-0  bg-warning ">
+                    <div class="container-fluid px-0 mx-0  bg-primary ">
                         <div class="container col-lg-11 px-4">
-
-
                     <div class="mt-alerts">
                         <div class="alert alert-dismissible fade show text-center" role="alert">
-                           {{message}}.
+                           {{message}}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
 
@@ -23,7 +21,7 @@
                         <div class="container col-lg-11 px-4">
                     <div class=" mt-alerts ">
                         <div class="alert alert-dismissible fade show text-center" role="alert">
-                            {{message}} .Sorry.
+                            {{message}} Sorry.
                             <button  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>

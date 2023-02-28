@@ -1,34 +1,28 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 {%block bodyblock%}
 
 <!-- Landing Page Section -->
 <div class="container-fluid px-0 mx-0 homediv">
- <div class="container col-lg-9 py-5 ">
+ <div class="container col-lg-9 ">
    <div class="row">
-    <div class="col-lg-6 me-3">
+    <div class="col-lg-6 me-3 mt-5">
         <img src="{%static 'images/register.png'%}" class="img-fluid" alt="homepicture">
     </div>
-    <div class="col my-2">
+    <div class="col mb-3 ">
         <h3 >Register your account</h3><br>
-        <form action="">
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-              </div>
-              <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password">
-                <label for="floatingPassword">Confirm Password</label>
-              </div>
-    
-              <div class="mt-5 mb-3">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-              </div>
-        </form>
+        <form method="post" enctype="multipart/form-data" >
+          
+          {% csrf_token %}
+          <!-- {{ form.as_floating }} -->
+          {% bootstrap_form form layout='floating'  %}
+        
+           
+            <div class="mt-5 mb-3">
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+      </form>
           <a href="{% url 'user_auth:login'%}" class="text-primary mt-3">Already registered? Login here.</a>
       
     </div>
