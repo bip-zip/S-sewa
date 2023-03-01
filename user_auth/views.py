@@ -7,6 +7,8 @@ from .models import User
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, HttpResponseRedirect
 
+
+
 class SigninView(LoginView):
     template_name='user_auth/login.html'
     success_message = "You were successfully logged in."
@@ -50,11 +52,22 @@ class RegisterView(CreateView):
         return render(request, self.template_name, {'form':form})
 
 
+import qrcode
+import qrcode.image.svg
+from io import BytesIO
+
 
 class ProfileView(TemplateView):
     template_name='user_auth/userprofile.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(HomeView, self).get_context_data(**kwargs) 
-    #     context.update({ "posts":posts,'page':page,'featured':featured,'topviewed':topviews, 'categories':categories,'article_page':'active'})
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs) 
+        context.update({"qrcode":self.get_qrcode_svg('okok')})
+        return context
+    
+    def get_qrcode_svg(self, text):
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(text ,image_factory=factory, box_size=60)
+        stream = BytesIO()
+        img.save(stream)
+        return stream.getvalue().decode()
