@@ -55,19 +55,32 @@ class RegisterView(CreateView):
 import qrcode
 import qrcode.image.svg
 from io import BytesIO
-
+import base64
 
 class ProfileView(TemplateView):
     template_name='user_auth/userprofile.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProfileView, self).get_context_data(**kwargs) 
+    #     context.update({"qrcode":self.get_qrcode_svg('okok')})
+    #     return context
+  
+
+class QrCodeView(TemplateView):
+    template_name='user_auth/qr.html'
+
     def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs) 
-        context.update({"qrcode":self.get_qrcode_svg('okok')})
+        context = super(QrCodeView, self).get_context_data(**kwargs)
+        qrcode =  self.get_qrcode_svg('{}&{}'.format(self.request.user.id,self.request.user.email))
+        context.update({"qrcode":qrcode})
         return context
     
     def get_qrcode_svg(self, text):
         factory = qrcode.image.svg.SvgImage
-        img = qrcode.make(text ,image_factory=factory, box_size=60)
+        img = qrcode.make(text ,image_factory=factory, box_size=30)
         stream = BytesIO()
         img.save(stream)
-        return stream.getvalue().decode()
+        base64_image = base64.b64encode(stream.getvalue()).decode()
+        return 'data:image/svg+xml;utf8;base64,' + base64_image
+
+

@@ -21,7 +21,7 @@
             {% if user.is_authenticated %}
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item me-3">
-                <a class="nav-link {{homepage}}" aria-current="page" href="/"
+                <a class="nav-link {{homepage}}" aria-current="page" href="{%url 'user_auth:qr'%}"
                   >QR</a
                 >
               </li>
