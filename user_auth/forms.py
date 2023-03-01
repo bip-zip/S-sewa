@@ -8,7 +8,7 @@ class UserRegisterForm(UserCreationForm):
     
     class Meta():
         model = User
-        fields = ('phone','email','document')
+        fields = ('email','document')
         labels = {
         "document": "Citizenship"}
         help_texts = {
@@ -22,12 +22,12 @@ class UserRegisterForm(UserCreationForm):
         for fieldname in ['email', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        qs = User.objects.filter(phone=phone)
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email=email)
         if qs.exists():
             raise forms.ValidationError("phone number is taken")
-        return phone
+        return email
 
     def clean_password2(self):
         # Check that the two password entries match

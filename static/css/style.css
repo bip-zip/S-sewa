@@ -85,6 +85,13 @@
 #F7DC6F
 #8E44AD */
 
+.footer {
+    /* position: absolute; */
+    width: 100%;
+    height: 2.5rem;   
+
+             /* Footer height */
+  }
 
 
 /* Footer Link */.footer_link{
