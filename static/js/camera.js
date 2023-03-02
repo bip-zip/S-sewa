@@ -44,12 +44,24 @@ function getCurrentFrame() {
   img_dataURI = canvas.toDataURL('image/png')
   video.style.display = "none";
   document.getElementById("my-data-uri").src = img_dataURI
+
 }
 
 function recapture(){
   location.reload();
   // document.getElementById("my-data-uri").style.display='none';
   // video.style.display = "block";
+}
+
+function postData(){
+  canvas.toDataURL('image/png')
+  var reader = new FileReader();
+  reader.onload = function(event) {
+    var form = document.getElementById("myForm");
+    var imageInput = document.getElementById("myImageInput");
+    imageInput.value = canvas.toDataURL('image/png');
+    form.submit();
+  }
 }
 
 camera();

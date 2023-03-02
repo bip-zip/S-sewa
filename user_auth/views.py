@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View, CreateView
 from django.contrib.auth.views import LoginView
@@ -88,6 +89,48 @@ class QrCodeView(TemplateView):
         return 'data:image/svg+xml;utf8;base64,' + base64_image
 
 
+import cv2
+import numpy as np
+from pyzbar.pyzbar import decode
+from PIL import Image
+
 class QrCodeScan(TemplateView):
     template_name= 'user_auth/qrscan.html'
+
+    def post(self,request):
+        uploaded_image = request.FILES['image']
+        return HttpResponse(self.qrcodeReader(uploaded_image))
+
+
+    def qrcodeReader(self, img):
+        # # Load the image containing the QR code
+        # img = cv2.imread('qr_code.png')
+        # # Convert the image to grayscale
+        # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # # Decode the QR code
+        # decoded = decode(gray)
+        # # Print the decoded data
+        # print(decoded[0].data.decode('utf-8'))
+        
+        # Read the image data using Pillow
+        image = Image.open(img)
+        
+        # Convert the image to grayscale
+        gray_image = image.convert('L')
+        
+        # Convert the grayscale image to a NumPy array
+        np_image = np.array(gray_image)
+        
+        # Decode the QR code in the image using pyzbar
+        decoded = decode(np_image)
+        
+        # Get the data from the QR code
+        if len(decoded) > 0:
+            data = decoded[0].data.decode('utf-8')
+        else:
+            data = 'No QR code found'
+        
+        return data
+
+
 

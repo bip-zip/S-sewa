@@ -13,6 +13,20 @@
            
             <button class="mt-2 btn btn-primary" onclick="getCurrentFrame();">Capture</button>
             <button class="mt-2 me-2 btn btn-primary" onclick="recapture();">Re-capture</button>
+            <form id="myForm" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <input type="file" id="myImageInput" name="image" hidden>
+              <button class="mt-2 me-2 btn btn-success" onclick="postData();">Done</button>
+            </form>
+
+
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="file" name="image">
+              <br><br>
+              <input type="submit" value="Upload">
+          </form>
           </p>
 
         
