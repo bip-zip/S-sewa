@@ -24,6 +24,10 @@ class SigninView(LoginView):
             auth_login(self.request, form.get_user())
             messages.success(self.request,'Logged in as {}.'.format(employee.username))
             return redirect('user_auth:profile')
+        elif employee.user_verification and employee.is_institution:
+            auth_login(self.request, form.get_user())
+            messages.success(self.request,'Logged in as {}.'.format(employee.email))
+            return redirect('user_auth:profile')
         elif not employee.user_verification:
             messages.error(self.request, "Account may be under verificaton.")
             return redirect('user_auth:login')
@@ -83,4 +87,7 @@ class QrCodeView(TemplateView):
         base64_image = base64.b64encode(stream.getvalue()).decode()
         return 'data:image/svg+xml;utf8;base64,' + base64_image
 
+
+class QrCodeScan(TemplateView):
+    template_name= 'user_auth/qrscan.html'
 

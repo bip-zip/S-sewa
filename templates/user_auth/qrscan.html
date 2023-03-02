@@ -1,0 +1,24 @@
+{% extends '../base.html' %} {% load static %} {%block bodyblock%}
+
+<div class="container-fluid px-0 mx-0 homediv">
+  <div class="container col-lg-9 py-2  mb-2">
+    <h3 class="text-center mb-3">QR Scan</h3>
+      <div style="margin: auto" class="text-center">
+       
+          <canvas id="myCanvas" hidden ></canvas>
+          <video autoplay="true" class="p-2 border border-lg" id="videoElement"> </video>
+
+          <img id="my-data-uri" src=""  class="img-fluid p-2 ">
+          <p>
+           
+            <button class="mt-2 btn btn-primary" onclick="getCurrentFrame();">Capture</button>
+            <button class="mt-2 me-2 btn btn-primary" onclick="recapture();">Re-capture</button>
+          </p>
+
+        
+    </div>
+  </div>
+</div>
+<script src="{%static 'js/camera.js'%}"></script>
+
+{%endblock%}
