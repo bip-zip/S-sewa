@@ -2,17 +2,52 @@
 
 <!-- Landing Page Section -->
 <div class="container-fluid px-0 mx-0 homediv">
-  <div class="container col-lg-9 py-5 my-5">
-    <p>User Profile</p>
-    <div class="input-group mb-3">
-      <div style="margin: auto">
+  <div class="container col-lg-9 py-1 my-3">
+    <div class="main">
+      <div class="row">
+          <div class="col-lg-7 mb-0">
+             
+              <div class="details">
+                <div class="h2"> Ramesh Paudel </div><br>
 
-        <img src="{{qrcode}}" alt="qrcode">
-     
+                  <table class="table bio">
+                      <tr>
+                          <td><b>Height</b></td>
+                          <td><b>5.5 ft</b></td>
+                      </tr>
+                      <tr>
+                          <td><b>Weight</b></td>
+                          <td><b>74 kg</b></td>
+                      </tr>
+                      <tr>
+                          <td><b>AGE</b></td>
+                          <td><b>32</b></td>
+                      </tr>
+                      <tr>
+                          <td><b>HEIGHT</b></td>
+                          <td><b>171 cm</b></td>
+                      </tr>
+                      <tr>
+                          <td><b>BMI</b></td>
+                          <td><b>19</b></td>
+                      </tr>
+                  </table> <br>
+                  <center>
+                      <p class="stats z-depth-4"><span class="one">86 SPD</span> &emsp;&emsp;&emsp;&emsp;<span class="two">95 SHT</span></p><br>
+                      <p class="stats z-depth-4"><span class="three">96 DRI</span>&emsp;&emsp; &emsp;&emsp;<span class="four">66 PHY</span></p><br>
+                      <p class="stats z-depth-4"><span class="five">88 PAS</span>&emsp;&emsp;&emsp;&emsp; <span class="six">43 DEF</span></p>
+                  </center>
+              </div>
+          </div>
+          <div class="col-lg-5"> <img class="doctorimg" src="{% static 'images/doctor.png'%}">
+              <p class="ss ms-5 text-center"><b>SS</b></p>
+              <p class="bigno ms-5 text-center"><b>94</b></p>
+          </div>
       </div>
-    </div>
+      <p>hk</p>
+  </div>
   </div>
 </div>
-<!-- Mentioned By thousands. including -->
+
 
 {%endblock%}

@@ -62,7 +62,7 @@
                 {{user.username}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_auth:profile'%}">Profile</a></li>
                 <li>
                   <a class="dropdown-item" onclick="return confirm('Are you sure to logout?')" href="{% url 'user_auth:logout'%}">Logout</a>
                 </li>
