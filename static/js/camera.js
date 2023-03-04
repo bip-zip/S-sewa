@@ -54,14 +54,22 @@ function recapture(){
 }
 
 function postData(){
-  canvas.toDataURL('image/png')
-  var reader = new FileReader();
-  reader.onload = function(event) {
+  
     var form = document.getElementById("myForm");
     var imageInput = document.getElementById("myImageInput");
-    imageInput.value = canvas.toDataURL('image/png');
-    form.submit();
-  }
+
+  //    // Create a new File object
+  //    const myFile = new File(canvas.toDataURL('image/png'), {
+  //     type: 'blob'
+  // });
+
+  // // Now let's create a DataTransfer to get a FileList
+  // const dataTransfer = new DataTransfer();
+  // dataTransfer.items.add(myFile);
+  // imageInput.files = dataTransfer.files;
+  imageInput.value = canvas.toDataURL('image/png')
+
+  form.submit();
 }
 
 camera();
