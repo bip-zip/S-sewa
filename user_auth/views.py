@@ -93,13 +93,30 @@ import cv2
 import numpy as np
 from pyzbar.pyzbar import decode
 from PIL import Image
+import io, base64
 
 class QrCodeScan(TemplateView):
     template_name= 'user_auth/qrscan.html'
 
     def post(self,request):
-        uploaded_image = request.FILES['image']
-        return HttpResponse(self.qrcodeReader(uploaded_image))
+        # uploaded_image = request.FILES['image']
+        image = request.POST['image']
+        print(image)
+        # img = Image.open(io.BytesIO(base64.decode(bytes(image, "utf-8"))))
+        # img = base64.b64encode(image.encode('utf-8'))
+        # img = base64.b64decode(str(image))
+# 
+        # img = Image.fromstring('RGB',(100,100),decodestring(image))
+
+        # ok = base64.b64decode(str(image))
+        # img = Image.open(io.BytesIO(ok))
+
+        img=Image.open(io.BytesIO(base64.b64decode(image)))
+        img.save("fksjjjjjjj.png")
+
+        
+        return HttpResponse(self.qrcodeReader(img))
+        # return HttpResponse(image.decode('utf-8'))
 
 
     def qrcodeReader(self, img):
@@ -131,6 +148,7 @@ class QrCodeScan(TemplateView):
             data = 'No QR code found'
         
         return data
+    
 
 
 
