@@ -99,9 +99,9 @@ class QrCodeScan(TemplateView):
     template_name= 'user_auth/qrscan.html'
 
     def post(self,request):
-        # uploaded_image = request.FILES['image']
+        # img = request.FILES['image']
         image = request.POST['image']
-        print(image)
+        # print(image)
         # img = Image.open(io.BytesIO(base64.decode(bytes(image, "utf-8"))))
         # img = base64.b64encode(image.encode('utf-8'))
         # img = base64.b64decode(str(image))
@@ -111,10 +111,16 @@ class QrCodeScan(TemplateView):
         # ok = base64.b64decode(str(image))
         # img = Image.open(io.BytesIO(ok))
 
-        img=Image.open(io.BytesIO(base64.b64decode(image)))
-        img.save("fksjjjjjjj.png")
+        # img = Image.open(BytesIO(base64.b64decode(image.split(',')[1])))
+        # img.save('okok.png')
 
-        
+        image_data = base64.b64decode(image.split(',')[1])
+
+        # create a BytesIO object from the decoded image data
+        img = BytesIO(image_data)
+
+
+      
         return HttpResponse(self.qrcodeReader(img))
         # return HttpResponse(image.decode('utf-8'))
 
