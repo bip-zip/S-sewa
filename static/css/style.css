@@ -4,8 +4,11 @@
   font-family: "Outfit", sans-serif;
   scroll-behavior: smooth;
 }
-.homediv {
-  /* background-image: url('../images/bg.svg'); */
+html, body {
+  height: 100%;
+}
+.homediv{
+  min-height: calc(100% ) !important;
 }
 .btn {
   border-radius: 0px !important;
@@ -43,6 +46,7 @@
 
 .bg-primary {
   background-color: #0c9fce !important;
+  opacity: 0.8;
 }
 
 .nav-link:hover {
@@ -88,10 +92,11 @@
 #F7DC6F
 #8E44AD */
 
-.footer {
+footer {
   /* position: absolute; */
   width: 100%;
   height: 2.5rem;
+  margin-top: 2em;
 
   /* Footer height */
 }

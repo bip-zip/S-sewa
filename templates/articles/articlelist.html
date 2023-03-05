@@ -7,7 +7,7 @@
  <div class="container col-lg-9 py-2 my-1">
     <div class="row">
         {% for object in object_list %}
-        <div class="col-lg-4 ms-2 article">
+        <div class="col-lg-4 mb-3 article">
            <a href="{{object.get_absolute_url}}" class="text-decoration-none text-dark">
             <img src="{{object.image.url}}" class="img-fluid mb-2" alt="{{object.title}}">
             <h5>{{object.title}}</h5>

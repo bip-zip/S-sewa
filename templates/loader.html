@@ -2,9 +2,9 @@
   .loading {
     /* background-color: #ffffff; */
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(2);
+  top: 85%;
+  left: 65%;
+  transform: translate(-50%, -50%) scale(5);
 }
 .loading svg polyline {
   fill: none;
@@ -16,7 +16,7 @@
   stroke: rgba(110,123,242,0.3);
 }
 .loading svg polyline#front {
-  stroke: #6e7bf2;
+  stroke: #0c9fce;
   stroke-dasharray: 12, 36;
   stroke-dashoffset: 48;
   animation: dash 1s linear infinite;
@@ -55,7 +55,7 @@
 }
 </style>
 <div class="loading"> 
-  <svg width="40px" height="50px">
+  <svg width="100px" height="120px">
     <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
     <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
   </svg>

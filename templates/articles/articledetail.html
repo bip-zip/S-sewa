@@ -7,26 +7,36 @@
  <div class="container col-lg-8 py-2 my-1">
     <div>
         <h3 class="mb-3">{{post.title}}</h3>
+        <p><i>Written by <b>{{post.author.username}}</b> & published on {{post.published}} </i> </p>
         <img src="{{post.image.url}}" alt="image" class="img-fluid" width="100%" ><br>
         <div class="my-2">
             {{post.body|safe}}
         </div>
-        <div>
-            <span><b>Tags: </b></span>
+        <div class="mt-5 mb-5">
+            <span><b>Article tags: </b></span>
             {% for i in post.tags.all %}
-            <span>{{i}}, </span>
+            <span class="">#{{i}} </span>
             {%endfor%}
-        </div>
-        <div>
-            <ul>
+        </div><hr class="text-muted">
+        <div class="mt-5">
+            <h4>Related Articles:</h4><br>
+            <div class="row mt-3">
                 {% for y in similar_posts %}
-                <li>
-                    <a href="{{y.get_absolute_url}}">
-                        {{y.title}}
+                <div class="col-lg-3">
+                    <a class="text-decoration-none text-dark " href="{{y.get_absolute_url}}">
+                        <img src="{{y.image.url}}" alt="image" class="img-fluid">
+                        <h6 class="mt-2">{{y.title}}</h6>
                     </a>
-                </li>
+
+                </div>
+                
+                   
+              
+                {%empty%}
+                <p class="text-center my-5">No related posts.</p>
                 {%endfor%}
-            </ul>
+            </div>
+            
         </div>
 
     </div>
