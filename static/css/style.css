@@ -240,3 +240,8 @@ tr {
     font-size: 8vw;
   }
 }
+
+.article:hover h5{
+  color: #0c9fce;
+  transition: 0.5s;
+}

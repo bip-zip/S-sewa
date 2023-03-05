@@ -1,53 +1,26 @@
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 from .models import Post
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.contrib import messages
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
-class ArticleView(TemplateView):
-    template_name='articles/list.html'
+class ArticleListView(ListView):
+    model= Post
+    template_name='articles/articlelist.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleView, self).get_context_data(**kwargs) 
+        context = super(ArticleListView, self).get_context_data(**kwargs) 
         featured = Post.objects.last()
         topviews = Post.objects.order_by('views').exclude(id=featured.id)[:4]
-        object_list = Post.objects.all().order_by('-id').exclude(id=featured.id)
-        paginator = Paginator(object_list, 12)
-        page = self.request.GET.get('page')
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-        context.update({ "posts":posts,'page':page,'featured':featured,'topviewed':topviews, 'categories':categories,'article_page':'active'})
+        posts = Post.objects.all().order_by('-id').exclude(id=featured.id)
+        context.update({'posts':posts, 'featured':featured,'topviewed':topviews,'article_page':'active'})
         return context
 
-
-class CategoryView(TemplateView):
-    template_name='articles/category.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CategoryView, self).get_context_data(**kwargs) 
-        slug= self.kwargs['slug']
-        cat = Category.objects.get(slug=slug)
-        object_list = Post.objects.filter(category=cat)
-        paginator = Paginator(object_list, 12)
-        page = self.request.GET.get('page')
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-        context.update({ "posts":posts,'page':page,'category':cat.category,'article_page':'active'})
-        return context
 
 class DetailView(TemplateView):
-    template_name='articles/detail.html'
+    template_name='articles/articledetail.html'
 
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
