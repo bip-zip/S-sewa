@@ -101,40 +101,15 @@ class QrCodeScan(TemplateView):
     def post(self,request):
         # img = request.FILES['image']
         image = request.POST['image']
-        # print(image)
-        # img = Image.open(io.BytesIO(base64.decode(bytes(image, "utf-8"))))
-        # img = base64.b64encode(image.encode('utf-8'))
-        # img = base64.b64decode(str(image))
-# 
-        # img = Image.fromstring('RGB',(100,100),decodestring(image))
-
-        # ok = base64.b64decode(str(image))
-        # img = Image.open(io.BytesIO(ok))
-
-        # img = Image.open(BytesIO(base64.b64decode(image.split(',')[1])))
-        # img.save('okok.png')
-
         image_data = base64.b64decode(image.split(',')[1])
-
         # create a BytesIO object from the decoded image data
         img = BytesIO(image_data)
-
-
-      
         return HttpResponse(self.qrcodeReader(img))
-        # return HttpResponse(image.decode('utf-8'))
+
 
 
     def qrcodeReader(self, img):
-        # # Load the image containing the QR code
-        # img = cv2.imread('qr_code.png')
-        # # Convert the image to grayscale
-        # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        # # Decode the QR code
-        # decoded = decode(gray)
-        # # Print the decoded data
-        # print(decoded[0].data.decode('utf-8'))
-        
+       
         # Read the image data using Pillow
         image = Image.open(img)
         
