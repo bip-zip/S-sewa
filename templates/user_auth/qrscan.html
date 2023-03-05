@@ -2,37 +2,33 @@
 
 <div class="container-fluid px-0 mx-0 homediv">
   <div class="container col-lg-9 py-2  mb-2">
+   <div style="cursor: -webkit-grab; cursor: grab;">
     <h3 class="text-center mb-3">QR Scan</h3>
-      <div style="margin: auto" class="text-center">
-       
-          <canvas id="myCanvas" hidden ></canvas>
-          <video autoplay="true" class="p-2 border border-lg" id="videoElement"> </video>
+    <div style="margin: auto" class="text-center">
+     
+        <canvas id="myCanvas" hidden ></canvas>
+        <video autoplay="true" class="p-2 border border-lg" id="videoElement"> </video>
 
-          <img id="my-data-uri" src=""  class="img-fluid p-2 ">
-          <p>
-           
-            <button class="mt-2 btn btn-primary" onclick="getCurrentFrame();">Capture</button>
-            <button class="mt-2 me-2 btn btn-primary" onclick="recapture();">Re-capture</button>
-            <form id="myForm" method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
+        <img id="my-data-uri" src=""  class="img-fluid p-2 ">
+        <p class="mt-3">
+         
+          <button class="mt-2 px-4 me-2 btn btn-primary" id="cap" onclick="getCurrentFrame();">Capture</button>
+          <button class="mt-2 px-4 me-5 btn btn-primary" id="recap" style="display: none;" onclick="recapture();">Re-capture</button>
+          <button class="mt-2 ms-5 px-3 me-2 btn btn-success" id="done" style="display: none;" onclick="postData();">Done</button>
 
-              <input type="text" id="myImageInput" name="image" hidden>
-              <button class="mt-2 me-2 btn btn-success" onclick="postData();">Done</button>
-            </form>
-            <hr>
-            <center>Or Choose form your device:</center>
+          <form id="myForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
-
-            <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <input type="file" name="image">
-              <br><br>
-              <input type="submit" value="Upload">
+            <input type="text" id="myImageInput" name="image" hidden>
           </form>
-          </p>
+          
+        </p>
 
-        
-    </div>
+        <p class="fw-light" id="helpcap">Lifehack: click anywhere inside the screen to capture the image.</p>
+
+      
+  </div>
+   </div>
   </div>
 </div>
 <script src="{%static 'js/camera.js'%}"></script>
