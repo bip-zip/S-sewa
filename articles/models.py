@@ -5,6 +5,7 @@ from taggit.managers import TaggableManager
 from django.urls import reverse
 from tinymce.models import HTMLField
 from django.template.defaultfilters import date
+from django.utils.text import slugify
 
 
 class Post(models.Model):
@@ -35,6 +36,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('articles:articledetail',
         args=[self.slug])
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
+
+
 
 
     @property

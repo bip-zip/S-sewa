@@ -1,10 +1,13 @@
-from django.views.generic import TemplateView, View, ListView
+from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView, View, ListView,CreateView
 from .models import Post
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from .forms import AddArticleForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ArticleListView(ListView):
     model= Post
@@ -33,3 +36,15 @@ class DetailView(TemplateView):
         context.update({ "post":obj, "similar_posts":similar_posts, 'article_page':'active'})
         return context
 
+class AddArticleView(LoginRequiredMixin,CreateView):
+    model = Post
+    form_class = AddArticleForm
+    template_name='articles/addarticle.html'
+    success_url='/articles'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.slug = self.request.user
+        messages.success(self.request,'Your article is under approval. It will be visible afterwards')
+        return super().form_valid(form)
+        

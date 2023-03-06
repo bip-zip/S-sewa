@@ -141,8 +141,9 @@ MEDIA_ROOT= MEDIA_DIR
 TINYMCE_DEFAULT_CONFIG = {
     'cleanup_on_startup': False,
     'custom_undo_redo_levels': 20,
-    # 'selector': 'textarea',
-    'theme': 'silver',
+    'theme': "silver",
+    'branding': False,
+    'height': 400,
     'plugins': '''
             textcolor save link image media preview codesample contextmenu
             table code lists fullscreen  insertdatetime  nonbreaking

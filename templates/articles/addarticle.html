@@ -1,0 +1,23 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{%block bodyblock%}
+
+
+<div class="container-fluid px-0 mx-0 homediv">
+ <div class="container col-lg-8 py-2 my-1">
+    <dir>
+        <h4>Request for Article</h4><br>
+        <form method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {% bootstrap_form form layout='floating'  %}
+            {{ form.media  }}
+            <button type="submit" class="btn btn-primary my-3">Send Request</button>
+        </form>
+    </dir>
+ </div>
+</div> 
+
+
+
+{%endblock%}
