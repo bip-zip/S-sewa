@@ -1,13 +1,9 @@
-from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView, View, ListView,CreateView
+from django.views.generic import TemplateView, ListView,CreateView, UpdateView
 from .models import Post
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .forms import AddArticleForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class ArticleListView(ListView):
     model= Post
@@ -15,10 +11,8 @@ class ArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs) 
-        featured = Post.objects.filter(status='published').last()
-        topviews = Post.objects.filter(status='published').order_by('views').exclude(id=featured.id)[:4]
-        posts = Post.objects.filter(status='published').order_by('-id').exclude(id=featured.id)
-        context.update({'posts':posts, 'featured':featured,'topviewed':topviews,'article_page':'active'})
+        posts = Post.objects.filter(status='published').order_by('-id')
+        context.update({'posts':posts, 'article_page':'active'})
         return context
 
 
@@ -47,4 +41,32 @@ class AddArticleView(LoginRequiredMixin,CreateView):
         form.instance.slug = self.request.user
         messages.success(self.request,'Your article is under approval. It will be visible afterwards')
         return super().form_valid(form)
+    
+
+class UpdateArticleView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = Post
+    form_class = AddArticleForm
+    template_name='articles/updatearticle.html'
+    success_url='/articles/articles'
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.slug = self.request.user
+        messages.success(self.request,'Update Successful. Your article is under approval. It will be visible afterwards.')
+        return super().form_valid(form)
         
+
+
+class UserArticlesView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Post
+    template_name = 'articles/userArticles.html'
+
+    def test_func(self):
+        return self.request.user == self.get_queryset().first().author
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)

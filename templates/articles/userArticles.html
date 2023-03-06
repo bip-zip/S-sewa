@@ -1,0 +1,52 @@
+{% extends '../base.html' %}
+{% load static %}
+{%block bodyblock%}
+
+
+<div class="container-fluid px-0 mx-0 homediv">
+ <div class="container col-lg-7 py-2 my-1">
+  <div class="mx-auto">
+   <h4>YOUR ARTICLES</h4><br><br>
+   {% for object in object_list %}
+   <div class="row mb-3">
+    <div class="col-md-10">
+      {% if object.status == 'published' %}
+       <a href="{{object.get_absolute_url}}" class="text-decoration-none text-dark">
+          <h5>{{object.title}} &nbsp;
+            
+            <i title="approved & published" class="text-primary fa-solid fa-circle-check fs-6"></i>
+           
+           
+          </h5>
+          
+          <p class="fw-light">{{object.excerpt}}</p>
+         </a>
+         {% else %}
+         <a href="{% url 'articles:updatearticle' object.pk %}" class="text-decoration-none text-dark">
+            <h5>{{object.title}} &nbsp;
+              
+             
+              <i title="under approval" class="text-warning fa-solid fa-hourglass-start fs-6"></i>
+             
+            </h5>
+            
+            <p class="fw-light">{{object.excerpt}}</p>
+           </a>
+         {% endif %}
+    </div>
+    <div class="col-md-2">
+       <img src="{{object.image.url}}" class="img-fluid mb-2" alt="{{object.title}}">
+    </div>
+     
+   </div><hr class="text-light">
+   {% empty %}
+   <li>No objects yet.</li>
+   {% endfor %}
+  </div>
+  
+ </div>
+</div> 
+
+
+
+{%endblock%}

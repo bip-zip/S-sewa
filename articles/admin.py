@@ -3,7 +3,7 @@ from .models import  Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin): 
-    list_display=('id', 'title', 'publish','slug')
+    list_display=('id', 'title', 'publish','status')
     list_display_links=('id','title',)
     search_fields=('title',)
     list_per_page =25
