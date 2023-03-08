@@ -81,6 +81,9 @@ html, body {
   color: #ffffff !important;
   border: none;
 }
+.text-primary{
+  color: #00bfd8 !important;
+}
 /* #4A4A4A
 #3498DB
 #16A085

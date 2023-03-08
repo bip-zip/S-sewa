@@ -21,6 +21,7 @@ class User(AbstractUser):
     document = models.FileField(null=True, upload_to='useruploads/')
 
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [] #emaila nd password are required fields and first name and last name is inherited from the user creation model
 

@@ -1,5 +1,6 @@
 from django.db import models
 from user_auth.models import User
+from django.contrib.auth import get_user_model
 # customize many to many field django
 
 class Medicine(models.Model):
@@ -18,13 +19,18 @@ class MedicationSchedule(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='institution')
+    desc = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.user.username
     
     @property
     def allmedicines(self):
-        return MedicineMedicationSchedule.objects.filter(medicationSchedule = self.id)
+        return MedicineMedicationSchedule.objects.filter(medicationSchedule=self.id)
+    
+    @property
+    def total_price(self):
+        pass
 
 
 class MedicineMedicationSchedule(models.Model):

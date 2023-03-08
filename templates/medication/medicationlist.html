@@ -4,13 +4,69 @@
 
 <!-- Landing Page Section -->
 <div class="container-fluid px-0 mx-0 homediv">
- <div class="container col-lg-9 py-2 my-2">
-    <h4>Your Medication Schedules</h4>
+ <div class="container col-lg-7 px-5 my-2">
+    <h3 class="p-0 m-0"><i class="fa-solid fa-clipboard-list text-primary fs-2"></i> &nbsp;  Your Medication Schedules</h3>
+    <p class="mt-0 ms-5 mb-5 p-0 text-muted">These are your medication histories. Click on items to see their details.</p>
     {% for i in object_list %}
-    <ul>{{i.created_date}}</ul>
-    {% for y in i.allmedicines %}
-    <li>{{y.medicine.name}} - {{y.medicine.dose}} mmHg - {{y.desc}} - {{y.timesaday}} - {{y.emptyStomach}} </li>
-    {%endfor%}
+    <div data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}" class="mb-5" >
+      <h5 class="p-0 m-0"><i class="fa-solid fa-pills"></i> &nbsp; {{i.created_by.first_name}} - {{i.created_date}} </h5>
+      <small class="px-4 mx-2 mt-0 pt-0  text-muted ">Reason: {{i.desc}}</small>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header" style="cursor: pointer;">
+         <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pills"></i> &nbsp; {{i.created_by.first_name}} - {{i.created_date}}</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+
+         <table class="table table-responsive">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">S.N.</th>
+                <th scope="col">Medicine</th>
+                <th scope="col">Dose</th>
+                <th scope="col">Time</th>
+                <th scope="col">Empty Stomach</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for y in i.allmedicines %}
+   
+              <tr class="text-center">
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{y.medicine.name}}</td>
+                <td>{{y.medicine.dose}} mmHg</td>
+                <td>{{y.timesaday}}</td>
+                <td>
+                  {% if y.emptyStomach %}
+                  <i class="fa-solid text-success fa-square-check"></i>
+
+                  {%else%}
+                  <i class="fa-solid text-danger fa-square-xmark"></i>
+                  {%endif%}
+                </td>
+                <td>{{y.desc}}</td>
+              </tr>
+
+              {%endfor%}
+            
+            </tbody>
+          </table>
+
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Close</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+   
     {%empty%}
     <p class="text-center my-5 py-5 text-muted">No schedules.</p>
     {%endfor%}
