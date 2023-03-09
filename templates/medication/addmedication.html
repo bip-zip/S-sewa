@@ -1,0 +1,81 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{%block bodyblock%}
+
+<!-- Landing Page Section -->
+<div class="container-fluid px-0 mx-0 homediv">
+ <div class="container col-lg-12 bg-primary p-5 mt-5 my-2">
+    <h2 class="p-0 m-0 py-5  text-center text-white"> Choose a way to work with. </h2>
+    <!-- <p class="mt-0 ms-5 mb-5 p-0 text-muted ">These are your medication histories. Click on items to see their details.</p> -->
+
+    <div class="d-flex justify-content-center">
+
+        <button  data-bs-toggle="modal" data-bs-target="#exampleModalad" class=" btn btn-lg btn-light text-primary mb-5 " >
+          Add Medical Record
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#exampleModalms" class="ms-3 btn btn-lg btn-outline-light mb-5 " >
+          Add Medication Schedule
+        </button>
+            <!-- Modal -->
+
+
+    </div>
+
+
+
+
+
+
+ </div>
+</div> 
+
+
+
+<div class="modal fade" id="exampleModalms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pills"></i> &nbsp; Add Medication Schedule</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="post">
+          
+                {% csrf_token %}
+                <!-- {{ form.as_floating }} -->
+                {% bootstrap_form form layout='floating'  %}
+              
+                 
+              
+            
+ 
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+          <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="modal fade" id="exampleModalad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pills"></i> &nbsp; Add Health Records</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         {%csrf_token%}
+         {{form.as_p}}
+ 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{%endblock%}

@@ -9,11 +9,10 @@ import numpy as np
 from pyzbar.pyzbar import decode
 from PIL import Image
 from django.contrib import messages
-from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
-
+from user_auth.models import User
 class QrCodeView(TemplateView):
-    template_name='user_auth/qr.html'
+    template_name='qrapp/qr.html'
 
     def get_context_data(self, **kwargs):
         context = super(QrCodeView, self).get_context_data(**kwargs)
@@ -31,39 +30,42 @@ class QrCodeView(TemplateView):
 
 
 class QrCodeScan(TemplateView):
-    template_name= 'user_auth/qrscan.html'
+    template_name= 'qrapp/qrscan.html'
 
     def post(self,request):
-        # img = request.FILES['image']
         image = request.POST['image']
         image_data = base64.b64decode(image.split(',')[1])
-        # create a BytesIO object from the decoded image data
+
         img = BytesIO(image_data)
-        return HttpResponse(self.qrcodeReader(img))
+        data = self.qrcodeReader(img)
+        if data == False :
+            messages.error(request, 'Invalid QR code.')
+            return redirect('qrapp:qrscan')
+        try:
+            User.object.filter(id=data.split('&')[0]).exists()
+        except ValueError:
+            messages.error(request, 'Invalid QR code.')
+            return redirect('qrapp:qrscan')
+        return redirect("/medications/add/?qrdata={}".format(data.split('&')[0]))
 
 
 
     def qrcodeReader(self, img):
-       
         # Read the image data using Pillow
         image = Image.open(img)
-        
         # Convert the image to grayscale
         gray_image = image.convert('L')
-        
         # Convert the grayscale image to a NumPy array
         np_image = np.array(gray_image)
-        
         # Decode the QR code in the image using pyzbar
         decoded = decode(np_image)
-        
         # Get the data from the QR code
         if len(decoded) > 0:
             data = decoded[0].data.decode('utf-8')
         else:
-            data = 'No QR code found'
-        
+            data = False
         return data
+        
     
 
 
