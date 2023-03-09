@@ -22,13 +22,13 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               {% if request.user.is_patient %}
               <li class="nav-item me-3">
-                <a class="nav-link {{homepage}}" aria-current="page" href="{%url 'user_auth:qr'%}"
+                <a class="nav-link {{homepage}}" aria-current="page" href="{%url 'qrapp:qr'%}"
                   >QR</a
                 >
               </li>
               {% else %}
               <li class="nav-item me-3">
-                <a class="nav-link {{homepage}}" aria-current="page" href="{%url 'user_auth:qrscan'%}"
+                <a class="nav-link {{homepage}}" aria-current="page" href="{%url 'qrapp:qrscan'%}"
                   >Scan QR</a
                 >
               </li>

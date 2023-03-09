@@ -8,6 +8,7 @@ urlpatterns = [
     path('articles/', include('articles.urls')),
     path('records/', include('records.urls')),
     path('medications/', include('medication.urls')),
+    path('qr/', include('qrapp.urls')),
 ]
 
 

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'articles',
     'tinymce',
      'taggit',
-     'medication'
+     'medication',
+     'qrapp'
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView, SigninView, ProfileView, QrCodeView, QrCodeScan
+from .views import RegisterView, SigninView, ProfileView
 from django.contrib.auth import views as auth_views
 from .views import *
 from django.views.generic.base import RedirectView
@@ -10,6 +10,5 @@ urlpatterns = [
     path('login', SigninView.as_view(), name='login' ),
      path('logout', auth_views.LogoutView.as_view(), name='logout'),      
      path('profile', ProfileView.as_view(), name='profile'),      
-     path('qr', QrCodeView.as_view(), name='qr'),      
-     path('qrscan', QrCodeScan.as_view(), name='qrscan'),      
+   
 ]
