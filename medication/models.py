@@ -15,7 +15,6 @@ class Medicine(models.Model):
     
     
 class MedicationSchedule(models.Model):
-    #  many to many field --- search it out
     medicine = models.ManyToManyField(Medicine, related_name='medicine', through='MedicineMedicationSchedule')
     created_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,7 +22,7 @@ class MedicationSchedule(models.Model):
     desc = models.CharField(max_length=500, null=True)
 
     def __str__(self):
-        return self.user.username
+        return (self.user.username + ' - ' + str(self.created))
     
     @property
     def allmedicines(self):
@@ -51,5 +50,5 @@ class MedicineMedicationSchedule(models.Model):
     emptyStomach = models.BooleanField(default=False) 
 
     def __str__(self):
-        return (self.medicationSchedule.user.username)
+        return (self.medicationSchedule.user.username )
 

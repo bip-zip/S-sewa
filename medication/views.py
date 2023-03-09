@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import MedicationSchedule
+from .models import MedicationSchedule, MedicineMedicationSchedule
 from user_auth.models import User
+from .forms import MedicationForm
 
 class MedicationListView(LoginRequiredMixin,ListView):
     template_name = 'medication/medicationlist.html'
@@ -20,19 +21,26 @@ class MedicationListView(LoginRequiredMixin,ListView):
 
 class AddMedicationSchedule(LoginRequiredMixin,CreateView):
     template_name='medication/addmedication.html'
-    model = MedicationSchedule
-    fields ='__all__'
+    # form_class = MedicationForm
+    model= MedicineMedicationSchedule
     success_url ='/'
+    fields = "__all__"
 
     def get_initial(self):
         initial = super().get_initial()
-        data = self.request.GET['qrdata']
-        if data == None:
-            return initial
-        userdata = data.split('&')[0]
-        user = User.object.get(id=userdata)
-        initial['user'] = user
+        initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user)
         return initial
+    
+    # def get_initial(self):
+    #     initial = super().get_initial()
+    #     data = self.request.GET['qrdata']
+    #     if data == None:
+    #         return initial
+    #     userdata = data.split('&')[0]
+    #     user = User.object.get(id=userdata)
+    #     initial['user'] = user
+    #     initial['created_by'] = self.request.user
+    #     return initial
 
     def form_valid(self, form):
         return super(AddMedicationSchedule, self).form_valid(form)
