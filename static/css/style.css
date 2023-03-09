@@ -68,6 +68,14 @@ html, body {
   background-color: #a200ff;
   /* color: #2e2e2e;  */
 }
+.cursor hover{
+  cursor: pointer;
+}
+
+.cursor hover .represent{
+  color: #00bfd8;
+
+}
 
 .btn-success {
   /* background-color:#FFDF00; */

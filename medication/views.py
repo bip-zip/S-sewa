@@ -10,7 +10,7 @@ class MedicationListView(LoginRequiredMixin,ListView):
     
     def get_context_data(self, **kwargs):
         context = super(MedicationListView, self).get_context_data(**kwargs)
-        obj = MedicationSchedule.objects.filter(user = self.request.user)
+        obj = MedicationSchedule.objects.filter(user = self.request.user).order_by('-id') | MedicationSchedule.objects.filter(created_by = self.request.user).order_by('-id')
 
         context.update({ "object_list":obj, 'medication_page':'active'})
         return context

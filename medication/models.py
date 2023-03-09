@@ -1,3 +1,4 @@
+from django.template.defaultfilters import date
 from django.db import models
 from user_auth.models import User
 from django.contrib.auth import get_user_model
@@ -27,6 +28,10 @@ class MedicationSchedule(models.Model):
     @property
     def allmedicines(self):
         return MedicineMedicationSchedule.objects.filter(medicationSchedule=self.id)
+    
+    @property
+    def created(self):
+        return '%s' % date(self.created_date, "F d, Y")
     
     @property
     def total_price(self):

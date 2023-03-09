@@ -6,10 +6,14 @@
 <div class="container-fluid px-0 mx-0 homediv">
  <div class="container col-lg-7 px-5 my-2">
     <h3 class="p-0 m-0"><i class="fa-solid fa-clipboard-list text-primary fs-2"></i> &nbsp;  Your Medication Schedules</h3>
-    <p class="mt-0 ms-5 mb-5 p-0 text-muted">These are your medication histories. Click on items to see their details.</p>
+    <p class="mt-0 ms-5 mb-5 p-0 text-muted cursor">These are your medication histories. Click on items to see their details.</p>
     {% for i in object_list %}
-    <div data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}" class="mb-5" >
-      <h5 class="p-0 m-0"><i class="fa-solid fa-pills"></i> &nbsp; {{i.created_by.first_name}} - {{i.created_date}} </h5>
+    <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}" class="mb-5 cursor" >
+      {% if request.user.is_institution %}
+      <h5 class="p-0 m-0"><i class="fa-solid fa-pills represent"></i> &nbsp; {{i.user.first_name}} {{i.user.last_name}} - {{i.created}} </h5>
+      {%else%}
+      <h5 class="p-0 m-0"><i class="fa-solid fa-pills represent"></i> &nbsp; {{i.created_by.first_name}} - {{i.created}} </h5>
+    {%endif%}
       <small class="px-4 mx-2 mt-0 pt-0  text-muted ">Reason: {{i.desc}}</small>
     </div>
 
@@ -17,8 +21,8 @@
 <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">
      <div class="modal-content">
-       <div class="modal-header" style="cursor: pointer;">
-         <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pills"></i> &nbsp; {{i.created_by.first_name}} - {{i.created_date}}</h5>
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-pills"></i> &nbsp; {{i.created_by.first_name}} - {{i.created}}</h5>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">
