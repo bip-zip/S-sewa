@@ -11,7 +11,9 @@ from PIL import Image
 from django.contrib import messages
 from django.http import HttpResponse
 from user_auth.models import User
+from django.http import HttpResponseRedirect
 class QrCodeView(TemplateView):
+    
     template_name='qrapp/qr.html'
 
     def get_context_data(self, **kwargs):
@@ -32,7 +34,7 @@ class QrCodeView(TemplateView):
 class QrCodeScan(TemplateView):
     template_name= 'qrapp/qrscan.html'
 
-    def post(self,request):
+    def post(self,request, action):
         image = request.POST['image']
         image_data = base64.b64decode(image.split(',')[1])
 
@@ -40,15 +42,17 @@ class QrCodeScan(TemplateView):
         data = self.qrcodeReader(img)
         if data == False :
             messages.error(request, 'Invalid QR code.')
-            return redirect('qrapp:qrscan')
+            return HttpResponseRedirect(self.request.path_info)
         try:
             User.object.filter(id=data.split('&')[0]).exists()
         except ValueError:
             messages.error(request, 'Invalid QR code.')
-            return redirect('qrapp:qrscan')
-        return redirect("/medications/add/?qrdata={}".format(data.split('&')[0]))
-
-
+            return HttpResponseRedirect(self.request.path_info)
+        if action == 'medicationschedule':
+            return redirect("/medications/add/?qrdata={}".format(data.split('&')[0]))
+        elif action == 'records' :
+            return redirect("/records/add/?qrdata={}".format(data.split('&')[0]))
+    
 
     def qrcodeReader(self, img):
         # Read the image data using Pillow

@@ -28,19 +28,9 @@ class AddMedicationSchedule(LoginRequiredMixin,CreateView):
 
     def get_initial(self):
         initial = super().get_initial()
-        initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user)
+        initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user).last()
+        # initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user)
         return initial
-    
-    # def get_initial(self):
-    #     initial = super().get_initial()
-    #     data = self.request.GET['qrdata']
-    #     if data == None:
-    #         return initial
-    #     userdata = data.split('&')[0]
-    #     user = User.object.get(id=userdata)
-    #     initial['user'] = user
-    #     initial['created_by'] = self.request.user
-    #     return initial
 
     def form_valid(self, form):
         return super(AddMedicationSchedule, self).form_valid(form)

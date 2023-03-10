@@ -2,7 +2,7 @@ from django.template.defaultfilters import date
 from django.db import models
 from user_auth.models import User
 from django.contrib.auth import get_user_model
-# customize many to many field django
+
 
 class Medicine(models.Model):
     name = models.CharField(max_length=200, null=False)
@@ -22,7 +22,7 @@ class MedicationSchedule(models.Model):
     desc = models.CharField(max_length=500, null=True)
 
     def __str__(self):
-        return (self.user.username + ' - ' + str(self.created))
+        return (self.user.username + ' - '+ str(self.created_by.first_name)+ ' - ' + str(self.created))
     
     @property
     def allmedicines(self):
