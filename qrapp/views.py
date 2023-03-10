@@ -49,7 +49,7 @@ class QrCodeScan(TemplateView):
             messages.error(request, 'Invalid QR code.')
             return HttpResponseRedirect(self.request.path_info)
         if action == 'medicationschedule':
-            return redirect("/medications/add/?qrdata={}".format(data.split('&')[0]))
+            return redirect("/medications/medicationcreate/?qrdata={}".format(data.split('&')[0]))
         elif action == 'records' :
             return redirect("/records/add/?qrdata={}".format(data.split('&')[0]))
     

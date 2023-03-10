@@ -20,14 +20,17 @@
         <p class="text-end fs-5 mb-4">
           <i class="fa-solid fa-pills"></i> &nbsp; Medicine lists
         </p>
-        
+        {% for i in medicines%}
         <div class="cursor text-end mb-3 ">
-          <span>1.</span>
-          <span>Paracetamol </span>
-          <span>10 mmHg </span>
-          <span>Empty Stomach</span>
-          <span>Morning, Afternoon, & Night</span>
+          <span>{{forloop.counter}}. </span>
+          <span>{{i.medicine.name}} - </span>
+          <span>{{i.desc}} - </span>
+
+          <span>{{i.timesaday}}</span>
         </div>
+        {%empty%}
+        <p class="text-center p-5 text-muted">No data. </p>
+        {%endfor%}
         
       </div>
     </div>
