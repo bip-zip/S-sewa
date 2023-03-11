@@ -18,18 +18,19 @@
       </div>
       <div class="col ms-3 ">
         <p class="text-end fs-5 mb-4">
-          <i class="fa-solid fa-pills"></i> &nbsp; Medicine lists
+          <i class="fa-solid fa-pills"></i> &nbsp;Assigned Medicine lists
         </p>
         {% for i in medicines%}
         <div class="cursor text-end mb-3 ">
           <span>{{forloop.counter}}. </span>
           <span>{{i.medicine.name}} - </span>
+          <span>{{i.medicine.dose}} mmhg- </span>
           <span>{{i.desc}} - </span>
 
           <span>{{i.timesaday}}</span>
         </div>
         {%empty%}
-        <p class="text-center p-5 text-muted">No data. </p>
+        <p class="text-end p-5 text-muted">No assignments</p>
         {%endfor%}
         
       </div>

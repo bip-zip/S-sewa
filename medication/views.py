@@ -4,7 +4,6 @@ from django.views.generic import CreateView, ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import MedicationSchedule, MedicineMedicationSchedule
 from user_auth.models import User
-from .forms import MedicationForm
 from django.http import HttpResponseRedirect
 
 class MedicationListView(LoginRequiredMixin,ListView):
@@ -22,24 +21,14 @@ class MedicationListView(LoginRequiredMixin,ListView):
 
 class AddMedicationSchedule(LoginRequiredMixin,CreateView):
     template_name='medication/addmedication.html'
-    form_class = MedicationForm
-    # model= MedicineMedicationSchedule
-    success_url ='/'
-    # fields = "__all__"
+    model = MedicineMedicationSchedule
+    fields =['medicine','desc','timesaday','emptyStomach']
 
-    def get_initial(self):
-        initial = super().get_initial()
-        initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user).last()
-        # self.fields['medicationSchedule'].queryset=MedicationSchedule.objects.filter(created_by=self.request.user).last()
-        # initial['medicationSchedule'] = MedicationSchedule.objects.filter(created_by=self.request.user)
-        return initial
-    
-    
-
-    # def form_valid(self, form):
-    #     self.object = form.save(False)
-    #     self.object.save()
-    #     return HttpResponseRedirect(self.request.path_info)
+    def form_valid(self, form):
+        self.object = form.save(False)
+        self.object.medicationSchedule = MedicationSchedule.objects.filter(created_by=self.request.user).last()
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('medication:addmedication')
