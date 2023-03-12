@@ -19,7 +19,7 @@
            {% if user.is_authenticated %}
            <p class="fs-5 fw-light" >It is always a good idea to track your activities.</p>
    
-           <a href="#" class="btn mt-3  btn-primary">See Your History</a>
+           <a href="{% url 'records:list'%}" class="btn mt-3  btn-primary">See Your History</a>
            
 
    {% else %}

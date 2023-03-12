@@ -4,8 +4,30 @@
 
 <div class="container-fluid px-0 mx-0 homediv">
  <div class="container col-lg-9 py-2 ">
-    <h3 class="p-0 m-0"><i class="fa-solid fa-clipboard-list text-primary fs-2"></i> &nbsp;  Your Health History</h3>
-    <p class="mt-0 ms-5 mb-5 p-0 text-muted cursor">These are your health histories. Click on items to see their details.</p>
+    <h3 class="p-0 m-0   mb-5"><i class="fa-solid fa-file-waveform"></i>&nbsp;  Your Health History</h3>
+    <!-- <p class="mt-0 ms-5 mb-5 ps-5 p-0 text-muted cursor">These are your health histories. Click on items to see their details.</p> -->
+
+    <div class="row">
+        <div class="col-md-12">
+          <div id="content">
+            <ul class="timeline-1 text-black">
+                {% for i in object_list %}
+
+              <li class="event" data-date="{{i.created}} - {{i.ended}}">
+                <h4 class="mb-3">{{i.created_by.first_name}}</h4>
+                <p>{{i.prescription|truncatechars:120}}</p>
+                <a class="text-decoration-none" href="{{i.documents.url}}" download><i class="fa-solid fa-file"></i> &nbsp; View Reports </a>
+
+                
+              </li>
+              {%empty%}
+              <p class="text-center m-5 p-5 text-muted">No data</p>
+              {%endfor%}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
 
  </div>
 </div> 

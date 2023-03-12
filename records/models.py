@@ -8,7 +8,7 @@ class HealthRecord(models.Model):
     ('discharged', 'Discharged'),
     )
     start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField(null=True)
+    end_date = models.DateTimeField(null=True, blank=True)
     documents = models.FileField(null=False, upload_to='healthrecords/')
     prescription = models.TextField(null=True)
     status = models.CharField(max_length=50, choices=STATUS )
@@ -18,4 +18,12 @@ class HealthRecord(models.Model):
     def __str__(self):
         return (self.user.username + ' - '+ str(self.created_by.first_name)+ ' - ' + str(self.status))
 
-
+    @property
+    def created(self):
+        return '%s' % date(self.start_date, "F d, Y")
+    
+    @property
+    def ended(self):
+        if self.end_date == None:
+            return str('On Going')
+        return '%s' % date(self.end_date, "F d, Y")
