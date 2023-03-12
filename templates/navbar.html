@@ -25,11 +25,11 @@
                 <a class="nav-link {{article_page}} " href="/articles">Articles</a>
               </li>
               <li class="nav-item me-3">
-                <a class="nav-link" href="#">History</a>
+                <a class="nav-link {{history_page}}" href="{% url 'records:list'%}">History</a>
               </li>
              
               <li class="nav-item me-3">
-                <a class="nav-link " href="{% url 'medication:medicationlist'%}" >Medications</a>
+                <a class="nav-link {{medication_page}} " href="{% url 'medication:medicationlist'%}" >Medications</a>
               </li>
               {% if request.user.is_patient %}
               <li class="nav-item me-3">
