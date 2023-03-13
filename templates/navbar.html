@@ -43,7 +43,7 @@
                   Create Records
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Add Health Records</a></li>
+                  <li><a class="dropdown-item" href="{% url  'qrapp:qrscan' action='records'  %}">Add Health Records</a></li>
                   <li><a class="dropdown-item" href="{% url  'qrapp:qrscan' action='medicationschedule'  %}">Add Medication Schedule</a></li>
                 </ul>
               </li>

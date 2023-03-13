@@ -9,7 +9,7 @@ class HealthRecord(models.Model):
     )
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(null=True, blank=True)
-    documents = models.FileField(null=False, upload_to='healthrecords/')
+    documents = models.FileField(null=True, upload_to='healthrecords/')
     prescription = models.TextField(null=True)
     status = models.CharField(max_length=50, choices=STATUS )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
