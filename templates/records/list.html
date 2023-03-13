@@ -4,9 +4,8 @@
 
 <div class="container-fluid px-0 mx-0 homediv">
  <div class="container col-lg-9 py-2 ">
+  {% if request.user.is_patient%}
     <h3 class="p-0 m-0   mb-5"><i class="fa-solid fa-file-waveform"></i>&nbsp;  Your Health History</h3>
-    <!-- <p class="mt-0 ms-5 mb-5 ps-5 p-0 text-muted cursor">These are your health histories. Click on items to see their details.</p> -->
-
     <div class="row">
         <div class="col-md-12">
           <div id="content">
@@ -28,6 +27,66 @@
           </div>
         </div>
       </div>
+      {%else%}
+   
+
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-12 col-xl-10">
+    
+            <div class="card">
+              <div class="card-header p-3">
+                <h5 class="mb-0"><i class="fa-solid fa-file-waveform me-2"></i> Your Assigned Histories</h5>
+              </div>
+              <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+    
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Patient</th>
+                      <th scope="col">Start Date</th>
+                      <th scope="col">End Date</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in object_list %}
+                    <tr class="fw-normal">
+                      <th>
+                       
+                        <span class="ms-2">{{i.user.first_name}} {{i.user.last_name}}</span>
+                      </th>
+                      <td class="align-middle">
+                        <span>{{i.created}}</span>
+                      </td>
+                      <td class="align-middle">
+                        <span>{{i.ended}}</span>
+                      </td>
+                      <td class="align-middle">
+                        <h6 class="mb-0"><span class="badge bg-primary">{{i.status}}</span></h6>
+                      </td>
+                      <td class="align-middle">
+                        <a href="#!" class="btn btn-warning btn-sm" data-mdb-toggle="tooltip" title="Update">Update</a>
+                        
+                      </td>
+                    </tr>
+                    {%empty%}
+                    <p class="text-center text-muted m- p-5">No data</p>
+                    {%endfor%}
+                 
+                  </tbody>
+                </table>
+    
+              </div>
+             
+            </div>
+    
+          </div>
+        </div>
+
+
+     
+      {%endif%}
 
  </div>
 </div> 
