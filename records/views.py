@@ -1,12 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, View, ListView, CreateView
-from .models import HealthRecord
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, View, ListView, CreateView, UpdateView
 from .models import HealthRecord
 from user_auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 
@@ -43,9 +42,21 @@ class AddRecord(LoginRequiredMixin,CreateView):
         messages.success(self.request,'Record added successfully.')
         return reverse('records:add')
     
-    # def get_context_data(self,request, **kwargs):
-    #     context = super(AddRecord, self).get_context_data(**kwargs)
-    #     user = User.object.get(id=request.GET.get('qrdata',None))
-    #     medicationschedule = MedicationSchedule.objects.create(created_by = request.user, user=user)
-    #     context.update({ "medicines":medicines})
-    #     return context
+
+class UpdateRecordView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = HealthRecord
+    # form_class = AddArticleForm
+    fields = '__all__'
+    template_name='records/updaterecords.html'
+    success_url='/articles/articles'
+
+    def test_func(self):
+        return self.request.user == self.get_object().created_by
+    
+    
+
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.user
+    #     form.instance.slug = self.request.user
+    #     messages.success(self.request,'Update Successful. Your article is under approval. It will be visible afterwards.')
+    #     return super().form_valid(form)

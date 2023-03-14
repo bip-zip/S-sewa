@@ -42,7 +42,7 @@
                 <table class="table mb-0">
                   <thead>
                     <tr>
-                      <th scope="col">Patient</th>
+                      <th scope="col">Patient Name</th>
                       <th scope="col">Start Date</th>
                       <th scope="col">End Date</th>
                       <th scope="col">Status</th>
@@ -66,7 +66,7 @@
                         <h6 class="mb-0"><span class="badge bg-primary">{{i.status}}</span></h6>
                       </td>
                       <td class="align-middle">
-                        <a href="#!" class="btn btn-warning btn-sm" data-mdb-toggle="tooltip" title="Update">Update</a>
+                        <a href="{% url 'records:update' pk=i.id %}" class="btn btn-warning btn-sm"  title="Update">Update</a>
                         
                       </td>
                     </tr>
