@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from .forms import RecordForm
 
 
 class HomeView(TemplateView):
@@ -18,7 +18,7 @@ class RecordListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(RecordListView, self).get_context_data(**kwargs)
-        obj = HealthRecord.objects.filter(user = self.request.user).order_by('-id') | HealthRecord.objects.filter(created_by = self.request.user).order_by('-id')
+        obj = HealthRecord.objects.filter(user = self.request.user).order_by('-end_date') | HealthRecord.objects.filter(created_by = self.request.user).order_by('-end_date')
         context.update({ "object_list":obj, 'history_page':'active'})
         return context
 
@@ -45,10 +45,9 @@ class AddRecord(LoginRequiredMixin,CreateView):
 
 class UpdateRecordView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = HealthRecord
-    # form_class = AddArticleForm
-    fields = '__all__'
+    form_class = RecordForm
     template_name='records/updaterecords.html'
-    success_url='/articles/articles'
+    success_url='/records/list'
 
     def test_func(self):
         return self.request.user == self.get_object().created_by
